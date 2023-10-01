@@ -18,6 +18,6 @@ The server does NOT cache requests to `/`.
 
 The specified static extensions are passed to the client and hte client is asked to cache them for 5 minutes.
 
-If you watch the logs of the reverse proxy and the backend server (`eight`) you will see that the backend will not be asked for files in the `/document/downloads` path for 3 minutes, one the initial visit is served.
+If you watch the logs of the reverse proxy and the backend server (`eight`) you will see that the backend will not be asked for files in the `/document/downloads` path for 3 minutes, once the initial visit is served.
 
 Then images an scrips are cached at the client, as evidenced in the header `Cache-Control: max-age=300`.
