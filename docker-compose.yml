@@ -18,7 +18,6 @@ services:
     volumes:
       - "${PWD}/log:/var/log/nginx:z"
       - "${PWD}/goaccess:/tmp/goaccess:z"
-    # command: goaccess /var/log/nginx/*.log -o index.html --real-time-html --port=9870
     command: ["/var/log/nginx/access.log", "-o", "/tmp/goaccess/index.html", "--real-time-html", "--port=9870", "--log-format=COMBINED"]
     ports:
       - "9870:9870"

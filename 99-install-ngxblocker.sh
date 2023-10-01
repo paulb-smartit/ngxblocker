@@ -29,9 +29,7 @@ for BOT in ${BOTS}; do
 done
 
 for CONF in ${CONFS}; do
-    # if [[ ! -f "/etc/nginx/conf.d/${CONF}" ]]; then
     curl -sL https://raw.githubusercontent.com/mitchellkrogza/nginx-ultimate-bad-bot-blocker/master/conf.d/${CONF} -o /etc/nginx/conf.d/${CONF}
-    # fi
 done
 
 chown www-data: /etc/nginx/bots.d/* /etc/nginx/conf.d/* -Rv
