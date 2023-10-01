@@ -1,0 +1,5 @@
+bots.d/*
+conf.d/*
+!conf.d/default.conf
+log/*
+goaccess/*

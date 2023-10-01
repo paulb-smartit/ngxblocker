@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  nginx:
+    image: nginx
+    volumes:
+      - "${PWD}/conf.d:/etc/nginx/conf.d:rw"
+      - "${PWD}/bots.d:/etc/nginx/bots.d:rw"
+      - "${PWD}/log:/var/log/nginx:z"
+      - "${PWD}/99-install-ngxblocker.sh:/docker-entrypoint.d/99-install-ngxblocker.sh:ro"
+      - "${PWD}/goaccess:/usr/share/nginx/html/goaccess:z"
+    ports:
+      - "8080:80"
+      - "8443:443"
+
+  goaccess:
+    build: build/goaccess-master
+    volumes:
+      - "${PWD}/log:/var/log/nginx:z"
+      - "${PWD}/goaccess:/tmp/goaccess:z"
+    # command: goaccess /var/log/nginx/*.log -o index.html --real-time-html --port=9870
+    command: ["/var/log/nginx/access.log", "-o", "/tmp/goaccess/index.html", "--real-time-html", "--port=9870", "--log-format=COMBINED"]
+    ports:
+      - "9870:9870"
+    depends_on:
+      - nginx
+
